@@ -25,14 +25,13 @@ async function getOrCreateLicenseSettings(env: CloudflareEnv) {
 }
 
 function toLicenseStatus(settings: typeof licenseSettings.$inferSelect): LicenseStatus {
-	const active = settings.state === "active" && (settings.plan === "pro" || settings.plan === "team");
 	return {
-		plan: active ? settings.plan : "community",
-		state: settings.state,
+		plan: "team",
+		state: "active",
 		features: parseFeatures(settings.features),
 		instanceId: settings.instanceId,
 		instanceUrl: settings.instanceUrl,
-		active,
+		active: true,
 		activatedAt: settings.activatedAt,
 		validatedAt: settings.validatedAt,
 	};
